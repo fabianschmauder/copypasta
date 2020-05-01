@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { fadeIn } from "../utils/animations";
+import React from 'react';
+import styled from '@emotion/styled';
+import { fadeIn } from '../utils/animations';
 
 const Fork = styled.path`
   fill: #505050;
@@ -29,7 +29,7 @@ export default function Logo(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="300.775"
+      width="100%"
       height="327.365"
       viewBox="0 0 300.775 327.365"
       {...props}
@@ -49,7 +49,7 @@ export default function Logo(props) {
         </Text>
         <HelloPastersText transform="translate(968.672 318.828) rotate(45)">
           <tspan x="-66.851" y="0">
-            (‘hello pasters’){" "}
+            (‘hello pasters’){' '}
           </tspan>
         </HelloPastersText>
       </g>

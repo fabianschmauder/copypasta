@@ -1,17 +1,15 @@
-import React from "react";
-import GlobalStyles from "./GlobalStyles";
-import Home from "./pages/Home";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Paste from "./pages/Paste";
-import Confirmation from "./components/Confirmation";
+import React from 'react';
+import GlobalStyles from './GlobalStyles';
+import Home from './pages/Home';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Paste from './pages/Paste';
+import Confirmation from './components/notifications/Confirmation';
+import { copyToClipboard } from './utils/clipboard';
+import AuthProvider from './contexts/auth/AuthProvider';
 
 function copyPasteURL(pasteId) {
-  const dummy = document.createElement("input");
-  document.body.appendChild(dummy);
-  dummy.value = `${window.location.origin}/${pasteId}`;
-  dummy.select();
-  document.execCommand("copy");
-  document.body.removeChild(dummy);
+  const pasteURL = `${window.location.origin}/${pasteId}`;
+  copyToClipboard(pasteURL);
 }
 
 function App() {
@@ -23,17 +21,24 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <GlobalStyles />
-      {showConfirmation && (
-        <Confirmation>
-          <div>🎉🎉🎉</div>URL copied to your clipboard!
-        </Confirmation>
-      )}
-      <Router>
-        <Route exact path="/" component={() => <Home onPaste={onPaste} />} />
-        <Route path="/:pasteId" component={Paste} />
-      </Router>
+    <div>
+      <AuthProvider>
+        <GlobalStyles />
+        {showConfirmation && (
+          <Confirmation>URL copied to your clipboard!</Confirmation>
+        )}
+        <Router>
+          <Route exact path="/">
+            <Home onPaste={onPaste} />
+          </Route>
+          <Route exact path="/:pasteId">
+            <Paste />
+          </Route>
+          <Route exact path="/embed/:pasteId">
+            <Paste embedded />
+          </Route>
+        </Router>
+      </AuthProvider>
     </div>
   );
 }

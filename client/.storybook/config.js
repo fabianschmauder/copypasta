@@ -1,13 +1,14 @@
-import GlobalStyles from "../src/GlobalStyles";
-import styled from "styled-components";
-import { configure, addDecorator } from "@storybook/react";
-import React from "react";
+import GlobalStyles from '../src/GlobalStyles';
+import styled from '@emotion/styled';
+import { configure, addDecorator } from '@storybook/react';
+import React from 'react';
+import requireContext from 'require-context.macro';
 
 const Main = styled.div`
   margin: 10px;
 `;
 // add GlobalStyle for every story
-const GlobalStyleDecorator = storyFn => (
+const GlobalStyleDecorator = (storyFn) => (
   <Main>
     <GlobalStyles />
     {storyFn()}
@@ -16,4 +17,4 @@ const GlobalStyleDecorator = storyFn => (
 addDecorator(GlobalStyleDecorator);
 
 // automatically import all files ending in *.stories.js
-configure(require.context("../src/stories", true, /\.stories\.js$/), module);
+configure(requireContext('../src/stories', true, /\.stories\.js$/), module);
