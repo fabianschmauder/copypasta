@@ -6,31 +6,12 @@ Create and share snippets.
 
 ## Develop
 
-Install client and server dependencies:
-
+To build the frontend start 
 ```
-npm install
-cd client
-npm install
+build-frontend.sh
 ```
 
-Add environment variables in .env file. You can copy the .env.example and update the variables.
-
+This copies the Frontend to the static spring folder
 ```
-cp .env.example .env
-```
-
-Next, update SLACK_WEBHOOK_URL and SENDGRID_API_TOKEN in `.env`. Slack and SendGrid integrations are optional.
-
-To start the server and client in development mode at the same time:
-
-```
-npm run dev
-```
-
-If you like to run the production build, you have to build the client first.
-
-```
-npm run build
-npm start
+backend/src/main/resources/static
 ```
